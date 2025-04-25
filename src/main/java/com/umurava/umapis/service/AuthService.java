@@ -1,6 +1,7 @@
 package com.umurava.umapis.service;
 
 import com.umurava.umapis.dto.UserInformDto;
+import com.umurava.umapis.dto.UserLoginDto;
 import com.umurava.umapis.model.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
@@ -18,6 +19,12 @@ public class AuthService {
 
     public User registerUser (UserInformDto userInformDto) {
         return this.userService.createUser(userInformDto);
+    }
+
+    public String loginUser (UserLoginDto userLoginDto) {
+        try {
+
+        }
     }
 
 }
