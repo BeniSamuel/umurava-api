@@ -1,6 +1,7 @@
 package com.umurava.umapis.controller;
 
 import com.umurava.umapis.dto.UserInformDto;
+import com.umurava.umapis.dto.UserLoginDto;
 import com.umurava.umapis.model.User;
 import com.umurava.umapis.service.AuthService;
 import com.umurava.umapis.util.ApiResponse;
@@ -23,5 +24,10 @@ public class AuthController {
     @PostMapping("/register-user")
     public ResponseEntity<ApiResponse<User>> registerUser (@RequestBody UserInformDto userInformDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Successfully registered a user!!! 🎉🎉🎉", this.authService.registerUser(userInformDto)));
+    }
+
+    @PostMapping("/login-user")
+    public ResponseEntity<ApiResponse<String>> loginUser (@RequestBody UserLoginDto userLoginDto) {
+        return this.authService.loginUser(userLoginDto);
     }
 }
