@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class ChallengeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse<Challenges>> createChallenge (@RequestPart("challengeDto") ChallengeDto challengeDto, @RequestPart("challengeCover") MultipartFile challengeCover) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Successfully created a challenge!!! 🎉🎉🎉", this.challengeService.createChallenge(challengeDto)));
+    public ResponseEntity<ApiResponse<Challenges>> createChallenge (@RequestPart("challengeDto") ChallengeDto challengeDto, @RequestPart("challengeCover") MultipartFile challengeCover) throws IOException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Successfully created a challenge!!! 🎉🎉🎉", this.challengeService.createChallenge(challengeDto, challengeCover)));
     }
 }
