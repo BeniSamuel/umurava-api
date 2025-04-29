@@ -1,5 +1,6 @@
 package com.umurava.umapis.controller;
 
+import com.umurava.umapis.dto.UserInformDto;
 import com.umurava.umapis.model.User;
 import com.umurava.umapis.service.UserService;
 import com.umurava.umapis.util.ApiResponse;
@@ -26,5 +27,20 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<User>> getUserById (@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Successfully obtained user!!! 🎉🎉🎉", this.userService.getUserById(id)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<User>> updateUserById (@PathVariable Long id, @RequestBody UserInformDto userInformDto) {
+        return ResponseEntity.ok(new ApiResponse<>(true, "Successfully updated user!!! 🎉🎉🎉", this.userService.updateUserById(id, userInformDto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteUserById (@PathVariable Long id) {
+        if (this.userService.deleteUserById(id)) {
+            return ResponseEntity.ok(new ApiResponse<>(true, "Successfully deleted user!!! 🎉🎉🎉", "Deleted"));
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(false, "Failed to deleted user!!!", "Failed"));
+        }
     }
 }
