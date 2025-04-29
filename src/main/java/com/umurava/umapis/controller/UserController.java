@@ -18,7 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<ApiResponse<List<User>>> getAllUsers () {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Successfully Obtained users!!! 🎉🎉🎉", this.userService.getAllUsers()));
     }
