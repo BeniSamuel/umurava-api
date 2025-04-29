@@ -22,6 +22,10 @@ public class ChallengeService {
         this.fileService = fileService;
     }
 
+//    public List<Challenges> getAllChallengesForCurrentUser () {
+//
+//    }
+
     public List<Challenges> getAllChallenges () {
         return this.challengesRepository.findAll();
     }
