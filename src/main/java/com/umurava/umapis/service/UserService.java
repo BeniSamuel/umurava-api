@@ -6,6 +6,8 @@ import com.umurava.umapis.enums.Role;
 import com.umurava.umapis.exception.NotFoundException;
 import com.umurava.umapis.model.User;
 import com.umurava.umapis.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,17 @@ public class UserService {
 
     public User getUserById (Long id) {
         return this.userRepository.getUserById(id).orElseThrow(() -> new NotFoundException("User Not Found!!"));
+    }
+
+    public User getLoggedUser () {
+        String email;
+         Object loggedInUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         if (loggedInUser instanceof UserDetails) {
+             email = ((UserDetails) loggedInUser).getUsername();
+         } else {
+             email = loggedInUser.toString();
+         }
+         return this.getUserByEmail(email);
     }
 
     public User createUser (UserInformDto userInformDto) {

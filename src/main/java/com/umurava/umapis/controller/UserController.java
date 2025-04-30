@@ -24,6 +24,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Successfully Obtained users!!! 🎉🎉🎉", this.userService.getAllUsers()));
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<ApiResponse<User>> getCurrentUser () {
+        return ResponseEntity.ok(new ApiResponse<>(true, "Successfully obtained user!!! 🎉🎉🎉", this.userService.getLoggedUser()));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<User>> getUserById (@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Successfully obtained user!!! 🎉🎉🎉", this.userService.getUserById(id)));
