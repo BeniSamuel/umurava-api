@@ -18,6 +18,10 @@ public class Challenges {
     private Date startTime;
     private Date endTime;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Enumerated(EnumType.STRING)
     private Cstatus cstatus;
 
@@ -42,6 +46,7 @@ public class Challenges {
     public Date getEndTime () { return this.endTime; }
     public Cstatus getCstatus () { return this.cstatus; }
     public Clevel getClevel () { return this.clevel; }
+    public User getUser () { return this.user; }
 
     public void setTitle ( String title ) { this.title = title; }
     public void setCover ( String cover ) { this.cover = cover; }
@@ -50,4 +55,5 @@ public class Challenges {
     public void setEndTime ( Date etime ) { this.endTime = etime; }
     public void setCstatus (Cstatus status) { this.cstatus = status; }
     public void setClevel (Clevel level) { this.clevel = level; }
+    public void setUser (User user) { this.user = user; }
 }

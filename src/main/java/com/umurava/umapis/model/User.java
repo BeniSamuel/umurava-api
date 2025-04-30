@@ -4,6 +4,8 @@ import com.umurava.umapis.enums.Gender;
 import com.umurava.umapis.enums.Role;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -24,6 +26,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Challenges> challenges;
+
     public User () {}
     public User (String name, String email, int phone, String password, Role role, Gender gender) {
         this.name = name;
@@ -40,6 +45,7 @@ public class User {
     public void setPhone (int phone) { this.phone = phone; }
     public void setRole (Role role) { this.role = role; }
     public void setGender (Gender gender) { this.gender = gender; }
+    public void setChallenges (Challenges challenge) { this.challenges.add(challenge); }
 
     public String getName () { return this.name; }
     public String getEmail () { return this.email; }
@@ -47,5 +53,6 @@ public class User {
     public int getPhone () { return  this.phone; }
     public Gender getGender () { return this.gender; }
     public Role getRole () { return this.role; }
+    public List<Challenges> getChallenges () { return this.challenges; }
 
 }

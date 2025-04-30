@@ -17,6 +17,9 @@ public class FileService {
 
     public String uploadFile (MultipartFile file) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectory(uploadPath);
+        }
         Path filePath = uploadPath.resolve(file.getOriginalFilename());
 
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);

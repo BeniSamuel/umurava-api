@@ -26,17 +26,17 @@ public class ChallengeController {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Successfully obtained all challenges!!! 🎉🎉🎉", this.challengeService.getAllChallenges()));
     }
 
-//    @GetMapping("")
-//    public ResponseEntity<ApiResponse<List<Challenges>>> getAllChallengesForCurrentUser () {
-//        return
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Challenges>> getChallengeById (@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Successfully found challenge!!! 🎉🎉🎉", this.challengeService.getChallengeById(id)));
     }
 
-    @PostMapping("/create")
+    @GetMapping("/user/me")
+    public ResponseEntity<ApiResponse<List<Challenges>>> getChallengesByActiveUser () {
+        return ResponseEntity.ok().body(new ApiResponse<>(true, "Successfully obtained challenge for user", this.challengeService.getAllChallengesByUser()));
+    }
+
+    @PostMapping(value = "/create", consumes = "multipart/form-data" )
     public ResponseEntity<ApiResponse<Challenges>> createChallenge (@RequestPart("challengeDto") ChallengeDto challengeDto, @RequestPart("challengeCover") MultipartFile challengeCover) throws IOException {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Successfully created a challenge!!! 🎉🎉🎉", this.challengeService.createChallenge(challengeDto, challengeCover)));
     }
